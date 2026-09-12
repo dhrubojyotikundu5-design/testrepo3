@@ -163,7 +163,7 @@ function showResult(result){
   document.getElementById("confidence").textContent =
     Math.round(result.probs[result.risk]*100)+"% confidence";
 
-  for(const c of ["LOW","MEDIUM","HIGH"]){
+  for(const c of ["LOW","HIGH"]){
     const p=Math.round(result.probs[c]*100);
     const id=c.toLowerCase();
     document.getElementById(id+"Bar").style.width=p+"%";
