@@ -143,14 +143,15 @@ function predict(vector){
     if(scores[n.label] !== undefined) scores[n.label] += weight;
   }
 
-  const total = scores.LOW+scores.MEDIUM+scores.HIGH || 1;
+    const lowScore = scores.LOW;
+  const highScore = scores.MEDIUM + scores.HIGH;
+  const total = lowScore + highScore || 1;
   const probs = {
-    LOW:scores.LOW/total,
-    MEDIUM:scores.MEDIUM/total,
-    HIGH:scores.HIGH/total
+    LOW: lowScore/total,
+    HIGH: highScore/total
   };
 
-  const risk = ["LOW","MEDIUM","HIGH"].sort((a,b)=>probs[b]-probs[a])[0];
+  const risk = probs.HIGH >= probs.LOW ? "HIGH" : "LOW";
   return {risk, probs};
 }
 
